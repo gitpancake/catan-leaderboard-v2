@@ -1,4 +1,5 @@
-import { Button, Link, Typography } from '@material-ui/core';
+import { Link, Typography } from '@material-ui/core';
+import { CreateLeaguePopover, EnterResultsModal } from 'components';
 import React from 'react';
 
 import Pod from '../Pod';
@@ -7,19 +8,17 @@ const DesktopHeader = () => {
 	return (
 		<React.Fragment>
 			<Pod>
-				<Link color="secondary" href="#" onClick={() => console.log('clicked')}>
+				<Link color="secondary" href="#">
 					<Typography>Create Fixture</Typography>
 				</Link>
 			</Pod>
 			<Pod>
-				<Link color="secondary" href="#" onClick={() => console.log('clicked')}>
-					<Typography>Create League</Typography>
+				<Link color="secondary" href="#">
+					<CreateLeaguePopover />
 				</Link>
 			</Pod>
 			<Pod>
-				<Button variant="contained" color="secondary">
-					Enter Results
-				</Button>
+				<EnterResultsModal />
 			</Pod>
 		</React.Fragment>
 	);

@@ -4,6 +4,9 @@ import { Auth0Provider } from '@auth0/auth0-react';
 import { ApolloProvider } from '@apollo/client';
 import client from 'apollo/client';
 import ThemeProvider from 'themes/MUI';
+import PlayersProvider from 'context/player';
+import LeaguesProvider from 'context/leagues';
+import ScoresProvider from 'context/scores';
 import Layout from 'structure/layout';
 
 function MyApp({ Component, pageProps }) {
@@ -22,9 +25,15 @@ function MyApp({ Component, pageProps }) {
 		>
 			<ApolloProvider client={client}>
 				<ThemeProvider>
-					<Layout>
-						<Component {...pageProps} />
-					</Layout>
+					<PlayersProvider>
+						<LeaguesProvider>
+							<ScoresProvider>
+								<Layout>
+									<Component {...pageProps} />
+								</Layout>
+							</ScoresProvider>
+						</LeaguesProvider>
+					</PlayersProvider>
 				</ThemeProvider>
 			</ApolloProvider>
 		</Auth0Provider>
