@@ -8,6 +8,7 @@ import { GET_LEAGUES } from 'apollo/queries/leagues';
 import { League } from 'types/league';
 import { getLeagueNames, findLeagueByName } from 'utils/leagues';
 import { LeagueContext } from 'context/leagues';
+import { Score } from 'types/score';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -31,7 +32,7 @@ export default function Home() {
 			const foundLeague = findLeagueByName(leagues, 'ATest');
 			const filteredLeagueNames = getLeagueNames(leagues);
 
-			setCurrentLeague(foundLeague);
+			setCurrentLeague(foundLeague ?? leagues[0]);
 			setLeagueNames(filteredLeagueNames);
 		};
 
@@ -47,7 +48,6 @@ export default function Home() {
 			<Typography color="error">Error, failed to load a league</Typography>
 		);
 	}
-
 	return (
 		<div>
 			<Head>
@@ -94,7 +94,13 @@ export default function Home() {
 							{loading || !currentLeague ? (
 								<Typography>Loading...</Typography>
 							) : (
-								<Table scores={currentLeague.totalScores} />
+								<Table
+									scores={currentLeague.totalScores
+										.slice()
+										.sort(
+											(a: Score, b: Score) => b.victoryPoints - a.victoryPoints,
+										)}
+								/>
 							)}
 						</>
 					)}

@@ -13,12 +13,12 @@ type ThemeContextType = {
 };
 
 export const ThemeContext = React.createContext<ThemeContextType>({
-	currentTheme: 'light',
+	currentTheme: 'dark',
 	SwitchTheme: () => {},
 });
 
 const ThemeContextProvider = ({ children }: Props) => {
-	const [currentTheme, setCurrentTheme] = React.useState<PaletteType>('light');
+	const [currentTheme, setCurrentTheme] = React.useState<PaletteType>('dark');
 
 	const SwitchTheme = (): void => {
 		if (currentTheme === 'dark') {

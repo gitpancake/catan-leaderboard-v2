@@ -10,6 +10,12 @@ const client = new ApolloClient({
 			Player: {
 				keyFields: ['_id'],
 			},
+			Game: {
+				keyFields: ['_id'],
+			},
+			Score: {
+				keyFields: ['playerName'],
+			},
 		},
 	}),
 });

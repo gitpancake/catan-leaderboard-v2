@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { gql, useMutation } from '@apollo/client';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
 import { Grid, IconButton, Input } from '@material-ui/core';
 import { Add } from '@material-ui/icons';
-import * as Leagues from 'apollo/queries/leagues';
+import { LeagueContext } from 'context/leagues';
 
 const useStyles = makeStyles((theme: Theme) => ({
 	root: {
@@ -21,26 +20,7 @@ const CreateLeaguePopover: React.FC = () => {
 	);
 	const [leagueName, setLeagueName] = React.useState<string>('');
 
-	const [addNewLeague] = useMutation(Leagues.CREATE_LEAGUE, {
-		update(cache, { data: { createLeague } }) {
-			cache.modify({
-				fields: {
-					leagues(existingLeagues = []) {
-						const newLeagueRef = cache.writeFragment({
-							data: createLeague,
-							fragment: gql`
-								fragment NewLeague on League {
-									_id
-									type
-								}
-							`,
-						});
-						return [...existingLeagues, newLeagueRef];
-					},
-				},
-			});
-		},
-	});
+	const { createLeague } = React.useContext(LeagueContext);
 
 	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
 		setAnchorEl(event.currentTarget);
@@ -88,7 +68,7 @@ const CreateLeaguePopover: React.FC = () => {
 					<Grid item md={3}>
 						<IconButton
 							onClick={() => {
-								addNewLeague({ variables: { name: leagueName } });
+								createLeague(leagueName);
 							}}
 						>
 							<Add />

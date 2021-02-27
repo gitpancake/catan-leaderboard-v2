@@ -2,6 +2,8 @@ import React from 'react';
 import '../styles/globals.css';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { ApolloProvider } from '@apollo/client';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
 import client from 'apollo/client';
 import ThemeProvider from 'themes/MUI';
 import PlayersProvider from 'context/player';
@@ -28,9 +30,11 @@ function MyApp({ Component, pageProps }) {
 					<PlayersProvider>
 						<LeaguesProvider>
 							<ScoresProvider>
-								<Layout>
-									<Component {...pageProps} />
-								</Layout>
+								<MuiPickersUtilsProvider utils={DateFnsUtils}>
+									<Layout>
+										<Component {...pageProps} />
+									</Layout>
+								</MuiPickersUtilsProvider>
 							</ScoresProvider>
 						</LeaguesProvider>
 					</PlayersProvider>
