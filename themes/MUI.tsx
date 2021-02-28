@@ -15,14 +15,16 @@ type ThemeContextType = {
 };
 
 export const ThemeContext = React.createContext<ThemeContextType>({
-	currentTheme: 'light',
+	currentTheme: 'dark',
 	SwitchTheme: () => {},
 });
 
 export const primaryMain = '#000051';
 
 const Theming = ({ children }: ThemingProps) => {
-	const [currentTheme, setCurrentTheme] = React.useState<PaletteType>('light');
+	const [currentTheme, setCurrentTheme] = React.useState<PaletteType>(
+		ThemeProcessor.GetCurrentTheme(),
+	);
 
 	const theme = createMuiTheme({
 		palette: {
