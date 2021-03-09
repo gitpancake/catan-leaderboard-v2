@@ -4,7 +4,6 @@ import * as Apollo from '@apollo/client';
 import * as playerQueries from 'apollo/queries/players';
 import { Player } from 'types/player';
 import { ApolloError } from '@apollo/client';
-import { SignalCellularNullSharp } from '@material-ui/icons';
 
 interface Props {
 	children: React.ReactElement;
