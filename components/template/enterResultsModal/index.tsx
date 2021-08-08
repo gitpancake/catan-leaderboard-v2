@@ -18,6 +18,7 @@ import { ScoreContext } from 'context/scores';
 import { LeagueContext } from 'context/leagues';
 import { Dropdown, Table } from 'components';
 import { AddCircle } from '@material-ui/icons';
+import { time } from 'console';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -276,7 +277,7 @@ const ResultsModal = () => {
 						onClick={async () => {
 							await createGame(gameDate, scores, league);
 							setOpen(false);
-							window.location.reload();
+							// window.location.reload();
 						}}
 						color="primary"
 						disabled={!league || scores.length <= 0}
